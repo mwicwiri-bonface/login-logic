@@ -1,3 +1,3 @@
 from .common import *
 
-ALLOWED_HOSTS += ['login-logic.pythonanywhere.com']
+ALLOWED_HOSTS += ['llogic.pythonanywhere.com']
