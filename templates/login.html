@@ -2,20 +2,14 @@
 {% block content %}
 <form method="post" class="mt-5">
     {% csrf_token %}
-        <div class="mb-3 row">
-            <label>Email</label>
-            <div class="col-12">
-              <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <label>Password</label>
-            <div class="col-12">
-              <input type="password" class="form-control">
-            </div>
-        </div>
-        <div class="d-grid gap-2">
-          <button class="btn btn-secondary" type="submit">Login</button>
-        </div>
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+          <div class="text-danger mb-3">{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+    {% include 'includes/form.html' %}
+    <div class="d-grid gap-2">
+      <button class="btn btn-secondary" type="submit">Login</button>
+    </div>
 </form>
 {% endblock %}

@@ -1,6 +1,8 @@
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField
-from django.forms import ModelForm
+from django.contrib.auth import get_user_model, logout
+from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, AuthenticationForm
+from django.forms import ModelForm, forms
+
+from accounts.mixins import StylingFormMixin
 
 User = get_user_model()
 
@@ -42,3 +44,17 @@ class UserAdminChangeForm(ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+
+class UserAuthenticationForm(StylingFormMixin):
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        username = username.upper()
+        return username
+
+    def clean(self):
+        super().clean()
+        if self.user_cache is None or self.user_cache.is_archived:
+            logout(self.request)
+            raise forms.ValidationError('Invalid username or password or both', code='invalid login')
