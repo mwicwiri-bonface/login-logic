@@ -1,18 +1,13 @@
-from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views import View
+from django.views.generic import TemplateView
 
 from accounts.forms import UserAuthenticationForm
 
 
-class HomeView(View):
+class HomeView(TemplateView):
     template_name = "home.html"
-
-    def get(self, *args, **kwargs):
-        return render(self.request, self.template_name)
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
