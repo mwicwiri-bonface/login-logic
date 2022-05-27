@@ -2,7 +2,8 @@ from django.contrib.auth import get_user_model, logout
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, AuthenticationForm
 from django.forms import ModelForm, forms
 
-from accounts.mixins import StylingFormMixin
+from accounts.mixins import StylingAuthFormMixin, StylingFormMixin
+from accounts.models import Contact
 
 User = get_user_model()
 
@@ -46,7 +47,7 @@ class UserAdminChangeForm(ModelForm):
         return self.initial["password"]
 
 
-class UserAuthenticationForm(StylingFormMixin):
+class UserAuthenticationAuthForm(StylingAuthFormMixin):
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
@@ -58,3 +59,9 @@ class UserAuthenticationForm(StylingFormMixin):
         if self.user_cache is None or self.user_cache.is_archived:
             logout(self.request)
             raise forms.ValidationError('Invalid username or password or both', code='invalid login')
+
+
+class ContactForm(StylingFormMixin):
+    class Meta:
+        model = Contact
+        exclude = ['created', 'updated', 'status']

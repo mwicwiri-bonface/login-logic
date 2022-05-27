@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path
 
 from accounts.decorators import user_login_required
-from accounts.views import UserLoginView, HomeView, UserLogoutView
+from accounts.views import UserLoginView, HomeView, UserLogoutView, ContactCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', UserLoginView.as_view(), name="login"),
     path('logout/', UserLogoutView.as_view(), name="logout"),
+    path('contact/', ContactCreateView.as_view(), name="contact"),
     path('', user_login_required(HomeView.as_view()), name="home")
 ]

@@ -1,5 +1,5 @@
 {% extends 'layouts/base.html' %}
-{% block title %}LOGIN PAGE {% endblock %}
+{% block title %}Contact Form {% endblock %}
 {% block content %}
 <form method="post" class="mt-5">
     {% csrf_token %}
@@ -10,7 +10,7 @@
     {% endif %}
     {% include 'includes/form.html' %}
     <div class="d-grid gap-2">
-      <button class="btn btn-secondary" type="submit">Login</button>
+      <button class="btn btn-secondary" type="submit">Send</button>
     </div>
 </form>
 {% endblock %}

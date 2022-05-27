@@ -9,13 +9,18 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated %}
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">LogOut</a>
-          {% else %}
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'contact' %}">Contact</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'login' %}">Login</a>
-          {% endif %}
-        </li>
+          </li>
+        {% endif %}
       </ul>
     </div>
   </div>
