@@ -20,5 +20,12 @@ Then install the dependencies:
 
 ```sh
 pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver
 ```
+```sh
+python manage.py createsuperuser
+```
+
+Login in the admin with the created username and password to created normal users and receive account creation requests.
